@@ -16,6 +16,8 @@
 		710521D02015C2A400F359AB /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710521CF2015C2A400F359AB /* ChatViewController.swift */; };
 		710521D32015C2CE00F359AB /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710521D22015C2CE00F359AB /* TextTableViewCell.swift */; };
 		710521D52015C2D500F359AB /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710521D42015C2D500F359AB /* ImageTableViewCell.swift */; };
+		71DDA6052015CBEE0012F015 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DDA6042015CBEE0012F015 /* Message.swift */; };
+		71DDA6072015CC200012F015 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DDA6062015CC200012F015 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		710521CF2015C2A400F359AB /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		710521D22015C2CE00F359AB /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		710521D42015C2D500F359AB /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
+		71DDA6042015CBEE0012F015 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		71DDA6062015CC200012F015 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				710521B82015A1DD00F359AB /* AppDelegate.swift */,
+				71DDA6032015CBDD0012F015 /* Models */,
 				710521D12015C2B200F359AB /* Views */,
 				710521CA2015A53200F359AB /* ViewControllers */,
 				710521BC2015A1DD00F359AB /* Main.storyboard */,
@@ -90,6 +95,15 @@
 				710521D42015C2D500F359AB /* ImageTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		71DDA6032015CBDD0012F015 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				71DDA6042015CBEE0012F015 /* Message.swift */,
+				71DDA6062015CC200012F015 /* User.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,8 +182,10 @@
 				710521CE2015BAAC00F359AB /* BaseViewController.swift in Sources */,
 				710521D02015C2A400F359AB /* ChatViewController.swift in Sources */,
 				710521D52015C2D500F359AB /* ImageTableViewCell.swift in Sources */,
+				71DDA6072015CC200012F015 /* User.swift in Sources */,
 				710521B92015A1DD00F359AB /* AppDelegate.swift in Sources */,
 				710521D32015C2CE00F359AB /* TextTableViewCell.swift in Sources */,
+				71DDA6052015CBEE0012F015 /* Message.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

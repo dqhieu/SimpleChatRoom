@@ -16,7 +16,7 @@ class User: NSObject {
     init(email: String) {
         self.email = email
         if let username = email.split(separator: "@").first {
-            self.username = username
+            self.username = String(username)
         } else {
             self.username = email
         }

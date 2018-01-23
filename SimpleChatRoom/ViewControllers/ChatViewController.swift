@@ -15,6 +15,8 @@ class ChatViewController: UIViewController {
     @IBOutlet weak var btnSend: UIButton!
     var pickedImage: UIImage?
     
+    var user: User!
+    
     func initControls() {
         self.tableView.estimatedRowHeight = 80
         self.tableView.rowHeight = UITableViewAutomaticDimension

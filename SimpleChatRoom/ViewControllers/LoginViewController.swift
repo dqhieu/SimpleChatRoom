@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import MBProgressHUD
 
 class LoginViewController: BaseViewController {
 
@@ -37,11 +39,36 @@ class LoginViewController: BaseViewController {
     }
 
     @IBAction func didTapSignInButton(_ sender: UIButton) {
-        
+        guard let email = self.txtEmail.text, let password = self.txtPassword.text, !email.isEmpty, !password.isEmpty else { return }
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
+            guard let `self` = self else { return }
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let _ = user {
+                let newUser = User(email: email)
+                self.navigateToChatVC(with: newUser)
+            }
+        }
     }
     
     @IBAction func didTapSignUpButton(_ sender: UIButton) {
-        
+        guard let email = self.txtEmail.text, let password = self.txtPassword.text, !email.isEmpty, !password.isEmpty else { return }
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
+            guard let `self` = self else { return }
+            MBProgressHUD.hide(for: self.view, animated: true)
+            if let _ = user {
+                let newUser = User(email: email)
+                self.navigateToChatVC(with: newUser)
+            }
+        }
+    }
+    
+    func navigateToChatVC(with user: User) {
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
+            vc.user = user
+            self.present(vc, animated: true, completion: nil)
+        }
     }
     
     override func onKeyboardWillShow(notification: NSNotification) {

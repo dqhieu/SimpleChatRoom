@@ -138,7 +138,7 @@
         <!--Chat View Controller-->
         <scene sceneID="2lW-u8-84M">
             <objects>
-                <viewController id="8NG-wR-jMb" customClass="ChatViewController" customModule="SimpleChatRoom" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" id="8NG-wR-jMb" customClass="ChatViewController" customModule="SimpleChatRoom" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RfE-gK-1qK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -282,7 +282,7 @@
                     </view>
                     <connections>
                         <outlet property="btnSend" destination="yUC-B0-EU3" id="r0t-Re-9D1"/>
-                        <outlet property="tableView" destination="hJI-N0-6eX" id="h0t-bk-Pgx"/>
+                        <outlet property="tableView" destination="hJI-N0-6eX" id="x9i-jL-TRQ"/>
                         <outlet property="txtMessage" destination="dlj-Sg-GVe" id="2SW-DP-70S"/>
                     </connections>
                 </viewController>

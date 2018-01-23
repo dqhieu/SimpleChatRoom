@@ -13,4 +13,6 @@ target 'SimpleChatRoom' do
 
   pod 'MBProgressHUD', '~> 1.1.0'
 
+  pod 'Kingfisher', '~> 4.0'
+
 end

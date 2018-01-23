@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ChatViewController: BaseViewController {
 
@@ -16,6 +17,8 @@ class ChatViewController: BaseViewController {
     var pickedImage: UIImage?
     
     var user: User!
+    var database: DatabaseReference!
+    var storage: StorageReference!
     
     func initControls() {
         self.tableView.estimatedRowHeight = 80
@@ -76,8 +79,6 @@ class ChatViewController: BaseViewController {
         let keyboardFrame:NSValue = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as? NSValue)!
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
-        
-        let keyboardTop = UIScreen.main.bounds.height - keyboardHeight
         
         UIView.animate(withDuration: 0.2, animations: {
             self.view.frame.origin.y = -keyboardHeight

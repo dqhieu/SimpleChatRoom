@@ -17,6 +17,7 @@
 		710521D32015C2CE00F359AB /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710521D22015C2CE00F359AB /* TextTableViewCell.swift */; };
 		710521D52015C2D500F359AB /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710521D42015C2D500F359AB /* ImageTableViewCell.swift */; };
 		712D65352016DBD100288F79 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 712D65342016DBD100288F79 /* GoogleService-Info.plist */; };
+		712D65382016E01600288F79 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712D65372016E01600288F79 /* Firebase.swift */; };
 		71DDA6052015CBEE0012F015 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DDA6042015CBEE0012F015 /* Message.swift */; };
 		71DDA6072015CC200012F015 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DDA6062015CC200012F015 /* User.swift */; };
 		EF9E54429D17C54AB9258F2C /* Pods_SimpleChatRoom.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3DA6A1D6223C8AD0796F703 /* Pods_SimpleChatRoom.framework */; };
@@ -36,6 +37,7 @@
 		710521D22015C2CE00F359AB /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		710521D42015C2D500F359AB /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
 		712D65342016DBD100288F79 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		712D65372016E01600288F79 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		71DDA6042015CBEE0012F015 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		71DDA6062015CC200012F015 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		9DDD09E52E7C3B9AA3411F2C /* Pods-SimpleChatRoom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SimpleChatRoom.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SimpleChatRoom/Pods-SimpleChatRoom.debug.xcconfig"; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 			isa = PBXGroup;
 			children = (
 				710521B82015A1DD00F359AB /* AppDelegate.swift */,
+				712D65362016E00100288F79 /* Service */,
 				71DDA6032015CBDD0012F015 /* Models */,
 				710521D12015C2B200F359AB /* Views */,
 				710521CA2015A53200F359AB /* ViewControllers */,
@@ -113,6 +116,14 @@
 				710521D42015C2D500F359AB /* ImageTableViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		712D65362016E00100288F79 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				712D65372016E01600288F79 /* Firebase.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		71DDA6032015CBDD0012F015 /* Models */ = {
@@ -263,6 +274,7 @@
 				710521D52015C2D500F359AB /* ImageTableViewCell.swift in Sources */,
 				71DDA6072015CC200012F015 /* User.swift in Sources */,
 				710521B92015A1DD00F359AB /* AppDelegate.swift in Sources */,
+				712D65382016E01600288F79 /* Firebase.swift in Sources */,
 				710521D32015C2CE00F359AB /* TextTableViewCell.swift in Sources */,
 				71DDA6052015CBEE0012F015 /* Message.swift in Sources */,
 			);

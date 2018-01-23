@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import FirebaseAuth
 import MBProgressHUD
+import Firebase
 
 class LoginViewController: BaseViewController {
 
@@ -22,6 +22,7 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var logoWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var logoHeightConstraint: NSLayoutConstraint!
     
+    var authService: Auth!
     
     func initControls() {
         self.btnSignIn.layer.cornerRadius = 4
@@ -31,6 +32,8 @@ class LoginViewController: BaseViewController {
         
         self.txtEmail.delegate = self
         self.txtPassword.delegate = self
+        
+        self.authService = Firebase.auth
     }
     
     override func viewDidLoad() {
@@ -41,7 +44,8 @@ class LoginViewController: BaseViewController {
     @IBAction func didTapSignInButton(_ sender: UIButton) {
         guard let email = self.txtEmail.text, let password = self.txtPassword.text, !email.isEmpty, !password.isEmpty else { return }
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        Auth.auth().signIn(withEmail: email, password: password) { [weak self] (user, error) in
+        
+        authService.signIn(withEmail: email, password: password) { [weak self] (user, error) in
             guard let `self` = self else { return }
             MBProgressHUD.hide(for: self.view, animated: true)
             if let _ = user {
@@ -54,7 +58,7 @@ class LoginViewController: BaseViewController {
     @IBAction func didTapSignUpButton(_ sender: UIButton) {
         guard let email = self.txtEmail.text, let password = self.txtPassword.text, !email.isEmpty, !password.isEmpty else { return }
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
+        authService.createUser(withEmail: email, password: password) { [weak self] (user, error) in
             guard let `self` = self else { return }
             MBProgressHUD.hide(for: self.view, animated: true)
             if let _ = user {
@@ -67,6 +71,8 @@ class LoginViewController: BaseViewController {
     func navigateToChatVC(with user: User) {
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController {
             vc.user = user
+            vc.database = Firebase.database
+            vc.storage = Firebase.storage
             self.present(vc, animated: true, completion: nil)
         }
     }

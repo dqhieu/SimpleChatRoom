@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatViewController: UIViewController {
+class ChatViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtMessage: UITextField!
@@ -22,6 +22,7 @@ class ChatViewController: UIViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension
         
         self.txtMessage.addTarget(self, action: #selector(textFieldDidChangeValue), for: .editingChanged)
+        self.txtMessage.delegate = self
     }
     
     override func viewDidLoad() {
@@ -44,11 +45,13 @@ class ChatViewController: UIViewController {
         self.txtMessage.isEnabled = true
         self.txtMessage.text = ""
         self.btnSend.setImage(UIImage(named: "ic_insert_photo"), for: .normal)
+        self.view.endEditing(true)
     }
     
     func sendTextMessage(text: String) {
         self.txtMessage.text = ""
         self.btnSend.setImage(UIImage(named: "ic_insert_photo"), for: .normal)
+        self.view.endEditing(true)
     }
     
     func presentImagePicker() {
@@ -65,6 +68,27 @@ class ChatViewController: UIViewController {
         } else {
             self.btnSend.setImage(UIImage(named: "ic_insert_photo"), for: .normal)
         }
+    }
+    
+    override func onKeyboardWillShow(notification: NSNotification) {
+        super.onKeyboardWillShow(notification: notification)
+        let userInfo:NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = (userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as? NSValue)!
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        
+        let keyboardTop = UIScreen.main.bounds.height - keyboardHeight
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.frame.origin.y = -keyboardHeight
+        })
+    }
+    
+    override func onKeyboardWillHide() {
+        super.onKeyboardWillHide()
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.frame.origin.y = 0
+        })
     }
 }
 
@@ -103,5 +127,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ChatViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return false
     }
 }

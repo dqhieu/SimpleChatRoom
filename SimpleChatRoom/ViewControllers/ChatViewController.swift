@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MBProgressHUD
 
 class ChatViewController: BaseViewController {
 
@@ -20,6 +21,8 @@ class ChatViewController: BaseViewController {
     var database: DatabaseReference!
     var storage: StorageReference!
     
+    var messages: [Message] = []
+    
     func initControls() {
         self.tableView.estimatedRowHeight = 80
         self.tableView.rowHeight = UITableViewAutomaticDimension
@@ -28,9 +31,43 @@ class ChatViewController: BaseViewController {
         self.txtMessage.delegate = self
     }
     
+    func observeMessages() {
+        database.child("MESSAGE").observe(.value) { [weak self] (snapshot) in
+            guard let `self` = self else { return }
+            self.messages.removeAll()
+            
+            guard let allChilds:[DataSnapshot] = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            for child in allChilds {
+                if let dict = child.value as? NSDictionary {
+                    if let userEmail = dict["userEmail"] as? String {
+                        let message = Message(user: User(email: userEmail))
+                        if let id = dict["id"] as? String {
+                            message.id = id
+                        }
+                        if let text = dict["text"] as? String {
+                            message.text = text
+                        }
+                        if let imageUrl = dict["imageUrl"] as? String {
+                            message.imageUrl = imageUrl
+                        }
+                        self.messages.append(message)
+                    }
+                }
+            }
+            
+            self.updateUI()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.initControls()
+        self.observeMessages()
+    }
+    
+    func updateUI() {
+        self.tableView.reloadData()
+        self.tableView.scrollToRow(at: IndexPath.init(row: self.messages.count - 1, section: 0), at: UITableViewScrollPosition.bottom, animated: true)
     }
 
     @IBAction func didTapSendButton(_ sender: UIButton) {
@@ -44,17 +81,49 @@ class ChatViewController: BaseViewController {
     }
     
     func sendPhotoMessage(image: UIImage) {
-        self.pickedImage = nil
-        self.txtMessage.isEnabled = true
-        self.txtMessage.text = ""
-        self.btnSend.setImage(UIImage(named: "ic_insert_photo"), for: .normal)
-        self.view.endEditing(true)
+        let newMesageRef = database.child("MESSAGE").childByAutoId()
+        
+        let message = Message(user: self.user)
+        message.id = newMesageRef.key
+        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        if let imageData = UIImagePNGRepresentation(image) {
+            storage.child("MESSAGE_IMAGES/\(newMesageRef.key).jpg").putData(imageData, metadata: nil, completion: { [weak self] (metadata, error) in
+                guard let `self` = self else { return }
+                if error == nil {
+                    let downloadURL = metadata!.downloadURL()
+                    message.imageUrl = downloadURL?.absoluteString
+                    newMesageRef.setValue(message.toDictionary()) { [weak self] (error, _) in
+                        guard let `self` = self else { return }
+                        MBProgressHUD.hide(for: self.view, animated: true)
+                        if error == nil {
+                            self.pickedImage = nil
+                            self.txtMessage.isEnabled = true
+                            self.txtMessage.text = ""
+                            self.btnSend.setImage(UIImage(named: "ic_insert_photo"), for: .normal)
+                            self.view.endEditing(true)
+                        }
+                    }
+                }
+            })
+        }
     }
     
     func sendTextMessage(text: String) {
-        self.txtMessage.text = ""
-        self.btnSend.setImage(UIImage(named: "ic_insert_photo"), for: .normal)
-        self.view.endEditing(true)
+        let newMesageRef = database.child("MESSAGE").childByAutoId()
+        
+        let message = Message(user: self.user)
+        message.text = text
+        message.id = newMesageRef.key
+        
+        newMesageRef.setValue(message.toDictionary()) { [weak self] (error, data) in
+            guard let `self` = self else { return }
+            if error == nil {
+                self.txtMessage.text = ""
+                self.btnSend.setImage(UIImage(named: "ic_insert_photo"), for: .normal)
+                self.view.endEditing(true)
+            }
+        }
     }
     
     func presentImagePicker() {
@@ -100,10 +169,20 @@ extension ChatViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let message = self.messages[indexPath.row]
+        if let text = message.text, !text.isEmpty {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "TextCell", for: indexPath) as? TextTableViewCell else { return UITableViewCell() }
+            cell.setup(message: message)
+            return cell
+        } else if let _ = message.imageUrl {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ImageCell", for: indexPath) as? ImageTableViewCell else { return UITableViewCell() }
+            cell.setup(message: message)
+            return cell
+        }
         return UITableViewCell()
     }
 

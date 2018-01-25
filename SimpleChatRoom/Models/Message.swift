@@ -10,6 +10,7 @@ import UIKit
 
 class Message: NSObject {
 
+    var id: String = ""
     var user: User
     var text: String?
     var imageUrl: String?
@@ -18,5 +19,14 @@ class Message: NSObject {
         self.user = user
         self.text = text
         self.imageUrl = imageUrl
+    }
+    
+    func toDictionary() -> [String: Any] {
+        return [
+            "id": self.id,
+            "userEmail": self.user.email,
+            "text": self.text ?? "",
+            "imageUrl": self.imageUrl ?? ""
+        ]
     }
 }

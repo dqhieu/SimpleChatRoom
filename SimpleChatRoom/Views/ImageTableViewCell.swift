@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ImageTableViewCell: UITableViewCell {
 
@@ -14,8 +15,13 @@ class ImageTableViewCell: UITableViewCell {
     @IBOutlet weak var imgViewPhoto: UIImageView!
     @IBOutlet weak var imgViewHeightConstraint: NSLayoutConstraint!
     
-    func setup() {
+    func setup(message: Message) {
         self.imgViewHeightConstraint.constant = self.contentView.frame.width * 3.0 / 5.0
+        self.lblUsername.attributedText = NSAttributedString(string: message.user.username, attributes: [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)])
+        if let url = URL(string: message.imageUrl!) {
+            let resource = ImageResource(downloadURL: url, cacheKey: message.id)
+            self.imgViewPhoto.kf.setImage(with: resource)
+        }
     }
     
 }

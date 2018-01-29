@@ -16,7 +16,6 @@
 		710521D02015C2A400F359AB /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710521CF2015C2A400F359AB /* ChatViewController.swift */; };
 		710521D32015C2CE00F359AB /* TextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710521D22015C2CE00F359AB /* TextTableViewCell.swift */; };
 		710521D52015C2D500F359AB /* ImageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 710521D42015C2D500F359AB /* ImageTableViewCell.swift */; };
-		712D65352016DBD100288F79 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 712D65342016DBD100288F79 /* GoogleService-Info.plist */; };
 		712D65382016E01600288F79 /* Firebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 712D65372016E01600288F79 /* Firebase.swift */; };
 		71DDA6052015CBEE0012F015 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DDA6042015CBEE0012F015 /* Message.swift */; };
 		71DDA6072015CC200012F015 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DDA6062015CC200012F015 /* User.swift */; };
@@ -36,7 +35,6 @@
 		710521CF2015C2A400F359AB /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		710521D22015C2CE00F359AB /* TextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableViewCell.swift; sourceTree = "<group>"; };
 		710521D42015C2D500F359AB /* ImageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTableViewCell.swift; sourceTree = "<group>"; };
-		712D65342016DBD100288F79 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		712D65372016E01600288F79 /* Firebase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Firebase.swift; sourceTree = "<group>"; };
 		71DDA6042015CBEE0012F015 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		71DDA6062015CC200012F015 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				710521BF2015A1DD00F359AB /* Assets.xcassets */,
 				710521C12015A1DD00F359AB /* LaunchScreen.storyboard */,
 				710521C42015A1DD00F359AB /* Info.plist */,
-				712D65342016DBD100288F79 /* GoogleService-Info.plist */,
 			);
 			path = SimpleChatRoom;
 			sourceTree = "<group>";
@@ -207,7 +204,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				710521C32015A1DD00F359AB /* LaunchScreen.storyboard in Resources */,
-				712D65352016DBD100288F79 /* GoogleService-Info.plist in Resources */,
 				710521C02015A1DD00F359AB /* Assets.xcassets in Resources */,
 				710521BE2015A1DD00F359AB /* Main.storyboard in Resources */,
 			);

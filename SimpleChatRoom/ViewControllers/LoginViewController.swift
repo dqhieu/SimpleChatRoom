@@ -58,6 +58,7 @@ class LoginViewController: BaseViewController {
     @IBAction func didTapSignUpButton(_ sender: UIButton) {
         guard let email = self.txtEmail.text, let password = self.txtPassword.text, !email.isEmpty, !password.isEmpty else { return }
         MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         authService.createUser(withEmail: email, password: password) { [weak self] (user, error) in
             guard let `self` = self else { return }
             MBProgressHUD.hide(for: self.view, animated: true)
